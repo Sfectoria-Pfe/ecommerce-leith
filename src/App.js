@@ -2,14 +2,15 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Navig from './component/footer/Navig';
-// import Header from './component/header/Header';
+import Header from './component/header/Header';
+import Products from './pages/Products';
 
 function App() {
   return (
     <div className="App">
-    {/* <Header/> */}
-    <Navig/>
+    <Header/> 
+    
+    <Products/>
     </div>
   );
 }

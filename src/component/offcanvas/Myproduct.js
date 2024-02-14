@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { useState } from 'react';
 import Offcanvas from "react-bootstrap/Offcanvas";
 
 export default class Myproduct extends Component {
@@ -8,7 +7,6 @@ export default class Myproduct extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <>
         <Offcanvas
@@ -16,7 +14,7 @@ export default class Myproduct extends Component {
          onHide={this.props.handleClose}
         >
           <Offcanvas.Header closeButton>
-            <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+            <Offcanvas.Title>{this.props.title}</Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
             {this.props.body}
