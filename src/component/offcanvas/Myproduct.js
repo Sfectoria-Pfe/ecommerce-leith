@@ -1,28 +1,28 @@
-import React, { Component } from 'react'
-import { useState } from 'react';
-import Offcanvas from 'react-bootstrap/Offcanvas'
+import React, { Component } from "react";
+// import { useState } from 'react';
+import Offcanvas from "react-bootstrap/Offcanvas";
 
 export default class Myproduct extends Component {
-    
+  constructor(props) {
+    super();
+  }
+
   render() {
-    const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+    console.log(this.props);
     return (
-        <>
-       
-
-      <Offcanvas show={show} onHide={handleClose}>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc.
-        </Offcanvas.Body>
-      </Offcanvas>
+      <>
+        <Offcanvas
+        show={this.props.show}
+         onHide={this.props.handleClose}
+        >
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            {this.props.body}
+          </Offcanvas.Body>
+        </Offcanvas>
       </>
-    )
+    );
   }
 }

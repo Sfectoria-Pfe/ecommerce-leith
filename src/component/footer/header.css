@@ -32,7 +32,7 @@
 }
 .header__middle{
     display: flex;
-    flex: 1;
+    /* flex: 1; */
     justify-content: center;
 }
 .header__option > .MuiSvgIcon-root{
