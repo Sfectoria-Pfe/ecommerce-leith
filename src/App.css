@@ -2,5 +2,8 @@
   margin: 0;
 }
 .app{
-  background-color: #f1f2f5;
+  background-image:'url(https://i.imgur.com/n743WDX.png)' ;
+  background-attachment: fixed;
+  
+    
 }

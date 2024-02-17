@@ -6,6 +6,7 @@ import { Component } from 'react';
 
 import Header from './component/header/Header';
 import Products from './pages/Products';
+import Carousell from './component/Carousel';
 
 
 
@@ -33,7 +34,8 @@ class App extends Component{
     <div className="App">
       
     <Header addToCart={this.addToCart} cartItems={this.state.cartItems}/> 
-
+    <Carousell/>
+    
     <Products addToCart={this.addToCart }  cartItems={this.state.cartItems}/>
     </div>
     
