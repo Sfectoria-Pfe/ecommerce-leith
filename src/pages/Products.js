@@ -3,7 +3,6 @@ import Cards from "../component/cards/Card";
  import Placeholder from "react-bootstrap/Placeholder";
 import Card from "react-bootstrap/Card"; 
 import axios from "axios";
-import { Spinner } from "react-bootstrap";
 export default class Products extends Component {
   constructor() {
     super();
@@ -29,7 +28,7 @@ export default class Products extends Component {
     /*  const numberOfCarts = 10;
     const carts = Array.from({ length: numberOfCarts }, (_, index) => <Cards key={index} />); */
     return (
-      <div className="d-flex gap-3 flex-wrap justify-content-center p-2">
+      <div className="d-flex flex-wrap justify-content-center gap-5 p-5 '">
         {this.state.isLoading === true ? (
           <>
             <Card style={{ width: '18rem' }}>
@@ -113,7 +112,11 @@ export default class Products extends Component {
           </>
           
         
-        ) : (
+        ) :
+       
+          
+        (
+          
          
           this.state.data.map((product) => (
             <Cards
@@ -125,6 +128,7 @@ export default class Products extends Component {
               decription={product.description}
               price={product.price}
             />
+            
           ))
         )}
       </div>
