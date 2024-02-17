@@ -12,15 +12,18 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Myproduct from "../offcanvas/Myproduct";
 
+import Cart from "../../pages/Cart";
+
 export default class Navig extends Component {
   constructor() {
     super();
     this.state = {
       show: false,
-      showUser:false
+      showUser: false,
     };
-    this.handleClose=this.handleClose.bind(this)
-    this.handleCloseUser=this.handleCloseUser.bind(this)
+    this.handleClose = this.handleClose.bind(this);
+    this.handleCloseUser = this.handleCloseUser.bind(this);
+
   }
   handleClose() {
     this.setState({ show: false });
@@ -35,7 +38,9 @@ export default class Navig extends Component {
     this.setState({ showUser: true });
   }
 
+ 
   render() {
+
     return (
       <Navbar expand="lg" className=" bg-body-tertiary ">
         <Container fluid>
@@ -67,7 +72,10 @@ export default class Navig extends Component {
               </Nav.Link>
 
               <Nav.Link href="#action3" className="header__option">
-                <SupervisedUserCircleIcon fontSize="large" onClick={()=>this.handleShowUser()} />
+                <SupervisedUserCircleIcon
+                  fontSize="large"
+                  onClick={() => this.handleShowUser()}
+                />
               </Nav.Link>
             </Nav>
             <Nav>
@@ -84,9 +92,18 @@ export default class Navig extends Component {
             </Nav>
           </Navbar.Collapse>
         </Container>
-        <Myproduct show={this.state.show} handleClose={this.handleClose} body="cart and thank you" title="Cart" />
-        <Myproduct show={this.state.showUser} handleClose={this.handleCloseUser} body="user and thank you" title="My profile" />
-       
+        <Myproduct
+          show={this.state.show}
+          handleClose={this.handleClose}
+          body={<Cart addToCart={this.props.addToCart} cartItems={this.props.cartItems} />}
+          title="Cart"
+        />
+        <Myproduct
+          show={this.state.showUser}
+          handleClose={this.handleCloseUser}
+          body={"carte"}
+          title="My profile"
+        />
       </Navbar>
     );
   }
