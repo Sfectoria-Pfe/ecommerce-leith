@@ -5,7 +5,10 @@ let products = require("./data");
 const { log } = require("console");
 function handleRequest(request, response) {
   if (request.method === "GET" && request.url === "/pruducts") {
-    response.writeHead(200, { "Content-Type": "application/json"  });
+    response.writeHead(200, {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "http://localhost:3000",
+    });
     response.end(JSON.stringify(products));
   } else if (request.method === "GET" && request.url === "/") {
     console.log(request, "this the request");
@@ -37,7 +40,6 @@ function handleRequest(request, response) {
 
       response.end(JSON.stringify(products));
     }
-    
   } else {
     response.writeHead(404, { "Content-Type": "text/plain" });
     return response.end("404 Not Found!");

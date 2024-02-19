@@ -48,6 +48,7 @@ export default class Cards extends Component {
  
 
   render() {
+    const {cartItem}=this.props
     const action = (
       
       <React.Fragment >

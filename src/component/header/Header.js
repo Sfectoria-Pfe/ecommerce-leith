@@ -15,7 +15,7 @@ import Myproduct from "../offcanvas/Myproduct";
 import Cart from "../../pages/Cart";
 
 export default class Navig extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
       show: false,
@@ -58,7 +58,7 @@ export default class Navig extends Component {
           >
             <div className="header__input">
               <SearchIcon />
-              <input type="text" placeholder="Search Product" />
+              <input type="text" placeholder="Search Product" onChange={(e)=>{this.props.changeValueSearch(e)}} />
             </div>
             <Nav navbarScroll>
               <Nav.Link
