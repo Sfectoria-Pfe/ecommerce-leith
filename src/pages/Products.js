@@ -16,7 +16,8 @@ export default function Products(props) {
   useEffect(() => {
     if (props.searchValue.length) SearchData();
     else getData();
-  }, [props.searchValue]);
+    console.log(window.location);
+  }, [props.searchValue,test]);
 
   const getData = async () => {
     try {
