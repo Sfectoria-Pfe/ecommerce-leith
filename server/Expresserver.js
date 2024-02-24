@@ -15,6 +15,13 @@ app.get("/products", (request, responce) => {
   responce.send(products);
 });
 
+app.get("/product/:id", (request, response) => {
+  const { id } = request.params;
+  let myProduct = products.find((elem) => elem.id === +id); // return one elem
+  if (myProduct) response.send(myProduct);
+  else response.status(400).send("id not found");
+});
+
 app.post("/search", (req, res) => {
   const { text } = req.body;
   res

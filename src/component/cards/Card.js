@@ -5,6 +5,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Popuup from "../popup/Popuup";
 import { IconButton, Snackbar } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
+import { Link } from "react-router-dom";
 
 
 export default class Cards extends Component {
@@ -81,9 +82,9 @@ export default class Cards extends Component {
             </ListGroup>
             <div className="d-flex justify-content-between ">
 
-            <Button variant="primary" onClick={() => this.handleShow()}>
+            <Link  to={`/product/${this.props.id}`} className="btn btn-primary">
               See more
-            </Button>
+            </Link>
             <Button
               variant="info"
               onClick={()=>this.handleAddToCart()}

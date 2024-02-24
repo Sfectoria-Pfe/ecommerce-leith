@@ -17,7 +17,7 @@ export default function Products(props) {
     if (props.searchValue.length) SearchData();
     else getData();
     console.log(window.location);
-  }, [props.searchValue,test]);
+  }, [props.searchValue, test]);
 
   const getData = async () => {
     try {
@@ -142,9 +142,10 @@ export default function Products(props) {
       ) : (
         state.data.map((product) => (
           <Cards
+            key={product.id}
             cartItems={props.cartItems}
             addToCart={props.addToCart}
-            key={product.id}
+            id={product.id}
             imge={product.imageURL}
             title={product.productName}
             decription={product.description}
