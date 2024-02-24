@@ -17,7 +17,7 @@ app.get("/products", (request, responce) => {
 
 app.get("/product/:id", (request, response) => {
   const { id } = request.params;
-  let myProduct = products.find((elem) => elem.id === +id); // return one elem
+  let myProduct = products.find(elem => elem.id === +id); // return one elem
   if (myProduct) response.send(myProduct);
   else response.status(400).send("id not found");
 });
@@ -28,7 +28,7 @@ app.post("/search", (req, res) => {
     .status(200)
     .send(
       products.filter(
-        (elem) =>
+        elem =>
           elem.productName.toUpperCase().includes(text.toUpperCase()) ||
           elem.description.toUpperCase().includes(text.toUpperCase())
       )
@@ -41,7 +41,7 @@ app.post("/product", (request, responce) => {
 });
 app.delete("/delete/:id", (request, responce) => {
   let id = +request.params.id;
-  let newProduct = products.filter((e) => e.id !== id);
+  let newProduct = products.filter(e => e.id !== id);
 
   if (JSON.stringify(newProduct) !== JSON.stringify(products)) {
     products = newProduct;
