@@ -22,7 +22,7 @@ export default function Products(props) {
   const getData = async () => {
     try {
       await setState({ ...state, isLoading: true });
-      let response = await axios.get("http://localhost:3100/products");
+      let response = await axios.get("http://localhost:3100/api/v1/products");
       setState({ data: response.data, isLoading: false });
     } catch {
       <p>you have an error</p>;

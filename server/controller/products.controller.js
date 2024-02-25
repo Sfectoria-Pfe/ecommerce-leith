@@ -1,7 +1,12 @@
-let products = require("../data.json");
+const { Product } = require("../model/models");
 
-const selectAll = (request, responce) => {
-  responce.send(products);
+const selectAll = async (req, res) => {
+  try {
+    const response = await Product.find();
+    res.send(response);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const search = (req, res) => {
@@ -17,29 +22,40 @@ const search = (req, res) => {
     );
 };
 
-const createProduct = (request, responce) => {
-  products.push(request.body);
-  responce.status(201).send(products);
+const createProduct = async (req, res) => {
+ try {
+    let result = await Product.create(req.body)
+    res.status(201).send(result)
+ } catch (error) {
+  console.log(error);
+ }
 };
 
-const findOne = (req, res) => {
-  const found = products.filter(e => e.id === +req.params.id);
-  res.send(found);
-};
-
-const deleteProduct = (request, responce) => {
-  let id = +request.params.id;
-  let newProduct = products.filter(e => e.id !== id);
-
-  if (JSON.stringify(newProduct) !== JSON.stringify(products)) {
-    products = newProduct;
-
-    responce.status(202).send(products);
-  } else {
-    responce.status(400).send("mch mawjouuuud");
+const findOne = async (req, res) => {
+  
+  try {
+    const found = await Product.findOne({id: +req.params.id});
+if(found) {
+  res.send(found)
+}
+else {
+  res.status(400).send("not found")
+}
+  
+  } catch (error) {
+    console.log(error);
   }
 };
 
+const deleteProduct = async (req, res) => {
+  
+try {
+  const result = await Product.deleteOne({id:+req.params.id})
+  res.send(result)
+  
+} catch (error) {
+  console.log(error);
+}
+};
 
-
-module.exports = {deleteProduct ,findOne,createProduct,selectAll, search }
+module.exports = { deleteProduct, findOne, createProduct, selectAll, search };
