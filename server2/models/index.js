@@ -7,12 +7,13 @@ const config = {
     password : "root"
   }
 
-const connection = mysql.createConnection(config)
+const db = mysql
+.createConnection(config)
 
-connection.connect((err)=>{
+db.connect((err)=>{
     if(err) console.log(err)
     else console.log("db connected");
 })
 
 
-module.exports = connection
+module.exports = db
