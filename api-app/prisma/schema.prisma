@@ -13,13 +13,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Users {
+model User {
   id Int @id @default(autoincrement())
 }
 
 model Program {
-  id Int @id @default(autoincrement())
-
+  id            Int             @id @default(autoincrement())
+  title         String
+  imageURL      String          @db.LongText
+  description   String
+  price         Float
+  category      String
   ProgramModule ProgramModule[]
 }
 
@@ -34,5 +38,6 @@ model ProgramModule {
 
 model Module {
   id            Int             @id @default(autoincrement())
+  title         String
   ProgramModule ProgramModule[]
 }
