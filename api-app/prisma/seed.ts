@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { dataProducts } from './data';
-import { of } from 'rxjs';
+
 
 // initialize Prisma Client
 const prisma = new PrismaClient();

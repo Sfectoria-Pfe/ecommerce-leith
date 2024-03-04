@@ -21,7 +21,7 @@ model Program {
   id            Int             @id @default(autoincrement())
   title         String
   imageURL      String          @db.LongText
-  description   String
+  description   String?
   price         Float
   category      String
   ProgramModule ProgramModule[]

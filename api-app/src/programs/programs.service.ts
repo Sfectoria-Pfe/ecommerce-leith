@@ -23,7 +23,7 @@ export class ProgramsService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} program`;
+    return this.prisma.program.findUniqueOrThrow({ where: { id } });
   }
 
   update(id: number, updateProgramDto: UpdateProgramDto) {
