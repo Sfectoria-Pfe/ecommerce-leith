@@ -10,7 +10,7 @@ export default function AddProduct() {
   const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProduct({ ...product, [name]: value });
+    setProduct({ ...product, [name]: name === "price" ? +value : value });
   };
   console.log(product);
   return (
@@ -41,6 +41,13 @@ export default function AddProduct() {
           name="price"
           type="number"
           min={0}
+          onChange={handleChange}
+        />
+        <input
+          className="form-control"
+          placeholder="category"
+          name="category"
+          type="text"
           onChange={handleChange}
         />
       </div>

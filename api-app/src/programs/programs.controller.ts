@@ -8,8 +8,8 @@ export class ProgramsController {
   constructor(private readonly programsService: ProgramsService) {}
 
   @Post()
-  create(@Body() createProgramDto: CreateProgramDto) {
-    return this.programsService.create(createProgramDto);
+  create(@Body() dto: CreateProgramDto) {
+    return this.programsService.create(dto);
   }
 
   @Get()

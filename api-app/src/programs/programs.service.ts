@@ -6,12 +6,15 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class ProgramsService {
   constructor(private readonly prisma: PrismaService) {}
-  create(createProgramDto: CreateProgramDto) {
-    return 'This action adds a new program';
+  async create(dto: CreateProgramDto) {
+    
+    return await this.prisma.program.create({
+      data:dto,
+    });
   }
 
-  findAll() {
-    return this.prisma.program.findMany({
+  async findAll() {
+    return await this.prisma.program.findMany({
       include: {
         ProgramModule: {
           include: {
@@ -34,3 +37,13 @@ export class ProgramsService {
     return `This action removes a #${id} program`;
   }
 }
+type Person = {
+  id: String;
+};
+interface Product {
+  id?: Number;
+  name: any[];
+  reacts?: String[];
+}
+let khalil: Product;
+khalil = { name: ['value'], id: 5 };
