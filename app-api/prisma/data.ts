@@ -1,4 +1,4 @@
-[
+export const dataProducts = [
     {
       id: 1,
       productName: "Wireless Bluetooth Headphones",
@@ -79,4 +79,4 @@
       description: "Experience immersive sound with these wireless earbuds. Sweat-resistant and perfect for workouts.",
       category: "Electronics"
     }
-  ]
+  ];

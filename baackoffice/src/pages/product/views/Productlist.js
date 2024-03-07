@@ -1,5 +1,5 @@
 
-import * as React from "react";
+import React, { useEffect } from "react";
 import Table from "@mui/joy/Table";
 import Sheet from "@mui/joy/Sheet";
 import { Avatar } from "@mui/material";
@@ -8,6 +8,11 @@ import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../../../store/products";
+import { Link } from "react-router-dom";
+
+
 function createData(id, name, category, Price, image) {
   return { id, name, category, Price, image };
 }
@@ -18,7 +23,14 @@ const rows = [
   createData(3, "redmi", "spartphone", 16, ""),
 ];
 
-export default function Orderlist() {
+export default function Productlist() {
+  const products = useSelector((state) => state.products.products.items)
+const dispatch = useDispatch()
+useEffect(()=>{
+dispatch(fetchProducts())
+},[dispatch])
+console.log(products,"state");
+
   return (
     <div className="shadow p-3 mb-5 bg-white rounded">
     <Sheet variant="soft" sx={{ pt: 1, borderRadius: "sm" }} >
@@ -31,9 +43,9 @@ export default function Orderlist() {
         }}
       >
         <caption>
-          <Button variant="outline-secondary" className='position-absolute top-0 end-0    bg-opacity-50 shadow p-3 mb-5  rounded'>
-            <AddCircleIcon /> ADD Product
-          </Button>{" "}
+          <Link to={"add"} variant="outline-secondary" className='position-absolute top-0 end-0    bg-opacity-50 shadow p-3 mb-5  rounded'>
+            <AddCircleIcon  /> ADD Product
+          </Link>{" "}
         </caption>
         <thead>
           <tr>

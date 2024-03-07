@@ -27,6 +27,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.22.1",
     "react-scripts": "5.0.1",
+    "styled-components": "^6.1.8",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -35,7 +36,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "nodemon server",
-    "seed":"node server/model/seed.js"
+    "seed": "node server/model/seed.js"
   },
   "eslintConfig": {
     "extends": [
