@@ -16,7 +16,13 @@ import SignUp from "../pages/auth/SignUp";
 import Login from "../pages/auth/Login";
 import Order from "../pages/orders/Order";
 import Orderlist from "../pages/orders/views/Orderlist";
+import { Provider } from "react-redux";
+import { store } from "../store/store";
+
+
 export const UserContext = createContext();
+
+
 
 export default function Router() {
   const [user, setUser] = useState({
@@ -32,6 +38,7 @@ export default function Router() {
 
   return (
     <BrowserRouter>
+    <Provider store={store}>
       <UserContext.Provider value={{ user, setUser }}>
         <Routes>
           {user ? (
@@ -60,6 +67,7 @@ export default function Router() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </UserContext.Provider>
+      </Provider>
     </BrowserRouter>
   );
 }

@@ -12,13 +12,16 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-model Users {
-  id          Int      @id @default(autoincrement())
- 
-}
-model Product {
-  id          Int      @id @default(autoincrement())
-  title       String   @unique
-  description String?
 
+model Users {
+  id Int @id @default(autoincrement())
+}
+
+model Product {
+  id          Int    @id @default(autoincrement())
+  productName String
+  imageURL    String @db.LongText
+  price       Float
+  description String
+  category    String
 }

@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 import {
   MDBCard,
   MDBCardTitle,
@@ -33,7 +35,9 @@ export default class Cart extends Component {
               </MDBCol>
             </MDBRow>
           </MDBCard>
+          
         ))}
+            <Link variant="primary" to={"/cart"} className="btn">see desc</Link>
       </>
     );
   }
