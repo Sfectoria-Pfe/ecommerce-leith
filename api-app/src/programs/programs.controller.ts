@@ -1,8 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { ProgramsService } from './programs.service';
 import { CreateProgramDto } from './dto/create-program.dto';
 import { UpdateProgramDto } from './dto/update-program.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 @ApiTags('PROGRAMS')
 @Controller('programs')
 export class ProgramsController {
@@ -12,7 +22,7 @@ export class ProgramsController {
   create(@Body() dto: CreateProgramDto) {
     return this.programsService.create(dto);
   }
-
+  @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.programsService.findAll();

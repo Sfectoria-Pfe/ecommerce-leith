@@ -8,10 +8,11 @@ async function bootstrap() {
   app.enableCors({ origin: '*' });
   app.useGlobalPipes(new ValidationPipe());
   const config = new DocumentBuilder()
-    .setTitle('Cats example')
-    .setDescription('The cats API description')
+    .setTitle('SFECTORIA example')
+    .setDescription('The SFECTORIA API description')
     .setVersion('1.0')
-    .addTag('cats')
+    .addApiKey({type:'apiKey',name:'Authorization',in:'header'},'apiKey')
+    .addTag('SFECTORIA')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);
