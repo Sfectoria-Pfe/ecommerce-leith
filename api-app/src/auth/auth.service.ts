@@ -21,11 +21,16 @@ export class AuthService {
     }
     const { password, ...rest } = user;
     if (await bcrypt.compare(dto.password, password)) {
-      const auth = this.jwtService.sign(rest)
-      return auth;
+      const token = this.jwtService.sign(rest)
+      return token;
     } else {
       throw new HttpException('invalid password', HttpStatus.BAD_REQUEST);
     }
+  }
+
+  async getMyInfo(token:string){
+    const myInfo=this.jwtService.decode(token);
+    return myInfo
   }
 
   // findAll() {
