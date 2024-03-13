@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { FaBars } from "react-icons/fa";
 import { UserContext } from "../router/Router";
+import { useSelector } from "react-redux";
 
 export default function Navbar({ isOpen, setIsOpen }) {
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
+  const user=useSelector(store=>store.auth.me)
   return (
     <div
       className={`bg-black text-white d-flex ${isOpen? "justify-content-end":"justify-content-between"} align-items-center`}
@@ -22,7 +24,7 @@ export default function Navbar({ isOpen, setIsOpen }) {
       )}
       </div> 
       <div className="d-flex  align-items-center gap-3">
-        <p className="m-0">Welcome {user.userName}</p>
+        <p className="m-0">Welcome {user.fullName}</p>
         <img src={user.imageUrl} alt="leithPhoto" className="rounded-circle" style={{width:50,height:50,objectFit:"cover"}} />
        
       </div>

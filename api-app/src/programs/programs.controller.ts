@@ -7,12 +7,15 @@ import {
   Param,
   Delete,
   UseGuards,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { ProgramsService } from './programs.service';
 import { CreateProgramDto } from './dto/create-program.dto';
 import { UpdateProgramDto } from './dto/update-program.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { CurrentUser } from 'src/auth/decorator/current-user';
 @ApiTags('PROGRAMS')
 @Controller('programs')
 export class ProgramsController {
@@ -22,14 +25,17 @@ export class ProgramsController {
   create(@Body() dto: CreateProgramDto) {
     return this.programsService.create(dto);
   }
+
   @UseGuards(JwtAuthGuard)
   @Get()
-  findAll() {
-    return this.programsService.findAll();
+  findAll(@CurrentUser() user) {
+    if (['teacher','admin','manager'].includes(user.role)) {
+      return this.programsService.findAll(user.id);
+    } else throw new HttpException('invalid account',HttpStatus.FORBIDDEN);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string, @CurrentUser() user) {
     return this.programsService.findOne(+id);
   }
 

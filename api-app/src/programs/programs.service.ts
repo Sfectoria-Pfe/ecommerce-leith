@@ -13,7 +13,7 @@ export class ProgramsService {
     });
   }
 
-  async findAll() {
+  async findAll(id:string) {
     return await this.prisma.program.findMany({
       include: {
         ProgramModule: {
