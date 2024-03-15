@@ -16,6 +16,7 @@ import { UpdateProgramDto } from './dto/update-program.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CurrentUser } from 'src/auth/decorator/current-user';
+import { Role } from 'src/auth/decorator/role';
 @ApiTags('PROGRAMS')
 @Controller('programs')
 export class ProgramsController {
@@ -28,12 +29,11 @@ export class ProgramsController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  findAll(@CurrentUser() user) {
-    if (['teacher','admin','manager'].includes(user.role)) {
-      return this.programsService.findAll(user.id);
-    } else throw new HttpException('invalid account',HttpStatus.FORBIDDEN);
+  findAll(@Role(['teacher', 'admin', 'manager']) role) {
+    return this.programsService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string, @CurrentUser() user) {
     return this.programsService.findOne(+id);

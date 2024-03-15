@@ -1,14 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { axiosGetWithHeaders } from "../helpers/axiosWithHeaders";
 
 export const fetchProducts = createAsyncThunk("fetchProducts", async () => {
-  const response = await axios.get("http://localhost:5000/api/v1/programs");
+  const response = await axiosGetWithHeaders("programs");
   return response.data;
 });
 export const fetchProduct = createAsyncThunk("fetchProduct", async (id) => {
-  const response = await axios.get(
-    "http://localhost:5000/api/v1/programs/" + id
-  );
+  const response = await axiosGetWithHeaders("programs/" + id);
   return response.data;
 });
 export const sendProduct = createAsyncThunk("addProduct", async (body) => {

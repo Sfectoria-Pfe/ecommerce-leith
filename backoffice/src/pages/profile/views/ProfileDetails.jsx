@@ -4,8 +4,10 @@ import { UserContext } from "../../../router/Router";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import {useNavigate} from "react-router-dom"
+import {  useSelector } from "react-redux";
 export default function ProfileDetails() {
-  const { user, setUser } = useContext(UserContext);
+  const user = useSelector((store) => store.auth.me);
+  
 const navigate=useNavigate()
   return (
     <section style={{ backgroundColor: "#eee" }} className="d-flex justify-content-center p-5">

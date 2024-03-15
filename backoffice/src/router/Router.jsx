@@ -15,50 +15,54 @@ import ProfileDetails from "../pages/profile/views/ProfileDetails";
 import EditProfile from "../pages/profile/views/EditProfile";
 import Login from "../pages/auth/Login";
 import { getMe } from "../store/auth";
+import Spinner from "react-bootstrap/Spinner";
 export const UserContext = createContext();
 
 export default function Router() {
   const user = useSelector((store) => store.auth.me);
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   useEffect(() => {
     let token = localStorage.getItem("token");
-    if (token) dispatch(getMe());
+    if (token)
+      dispatch(getMe()).then((res) => {
+        setIsLoading(false);
+      });
   }, [dispatch]);
-  // const [user, setUser] = useState(
-  //   {
-  //   id: "1",
-  //   userName: "Leith",
-  //   Age: "30",
-  //   imageUrl:
-  //     "https://www.stryx.com/cdn/shop/articles/man-looking-attractive.jpg?v=1666662774",
-  // }
-  // );
 
   return (
-    <BrowserRouter>
-      {/* <UserContext.Provider value={{ user, setUser }}> */}
-      <Routes>
-        {user ? (
-          <Route path="/" element={<App />}>
-            <Route index element={<Dashboard />} />
-            <Route path="products" element={<Product />}>
-              <Route index element={<ProductList />} />
-              <Route path=":id" element={<ProductDetails />} />
-              <Route path="add" element={<AddProduct />} />
+    <>
+      {isLoading && (
+        <div className="position-fixed h-100 w-100 bg-white justify-content-center d-flex align-items-center" style={{zIndex:6}}>
+          <Spinner animation="border" />
+        </div>
+      )}
+
+      <BrowserRouter>
+        {/* <UserContext.Provider value={{ user, setUser }}> */}
+        <Routes>
+          {user ? (
+            <Route path="/" element={<App />}>
+              <Route index element={<Dashboard />} />
+              <Route path="products" element={<Product />}>
+                <Route index element={<ProductList />} />
+                <Route path=":id" element={<ProductDetails />} />
+                <Route path="add" element={<AddProduct />} />
+              </Route>
+              <Route path="profile" element={<Profile />}>
+                <Route index element={<ProfileDetails />} />
+                <Route path="edit" element={<EditProfile />} />
+              </Route>
             </Route>
-            <Route path="profile" element={<Profile />}>
-              <Route index element={<ProfileDetails />} />
-              <Route path="edit" element={<EditProfile />} />
+          ) : (
+            <Route path="/" element={<Auth />}>
+              <Route index element={<Login />} />
             </Route>
-          </Route>
-        ) : (
-          <Route path="/" element={<Auth />}>
-            <Route index element={<Login />} />
-          </Route>
-        )}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      {/* </UserContext.Provider> */}
-    </BrowserRouter>
+          )}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        {/* </UserContext.Provider> */}
+      </BrowserRouter>
+    </>
   );
 }

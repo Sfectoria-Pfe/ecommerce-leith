@@ -25,15 +25,21 @@ export class AuthController {
     return this.authService.login(dto);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Post('update-me')
+  updateMe(@Body() dto: UpdateAuthDto,@CurrentUser() user) {
+    return this.authService.updateMe(dto,user.id);
+  }
+
   @ApiSecurity('apiKey') // for swagger
   @UseGuards(JwtAuthGuard) // the get don't work without token
   @Get('me')
-  async findMe(@Request() req, @CurrentUser() user) {
+  async findMe(@Request() req, ) {
     // get all oject of request
-    console.log(user);
+    console.log(req.user,'from me');
 
     return await this.authService.getMyInfo(
-      req.get('Authorization').replace('Bearer ', ''),
+      req.get('Authorization').replace('Bearer ', ''), // just the token without Bearer and space
     );
   }
 
